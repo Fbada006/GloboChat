@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.example.globochat.R
-
 
 class ChatListFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_chat_list, container, false)
     }
@@ -22,7 +24,8 @@ class ChatListFragment : Fragment() {
 
         when (item.itemId) {
             R.id.action_settings -> {
-                val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_frag) as NavHostFragment
+                val navHostFragment =
+                    activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_frag) as NavHostFragment
                 val navController = navHostFragment.navController
                 val action = ChatListFragmentDirections.actionChatListToSettings()
                 navController.navigate(action)
