@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="@string/key_auto_reply"
+        android:summary="@string/summary_auto_reply"
+        android:title="@string/title_auto_reply"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>
