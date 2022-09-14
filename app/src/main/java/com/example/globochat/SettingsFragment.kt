@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
-import androidx.preference.EditTextPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
+import androidx.preference.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -17,6 +14,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
+
+        val dataStore = DataStore()
 
         val accSettingsPref = findPreference<Preference>(getString(R.string.key_account_settings))
 
@@ -59,6 +58,43 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 false
             } else {
                 true  //true accept new value and false reject new value
+            }
+        }
+
+        val notificationPref =
+            findPreference<SwitchPreferenceCompat>(getString(R.string.key_new_msg_notif))
+        notificationPref?.summaryProvider =
+            Preference.SummaryProvider<SwitchPreferenceCompat> { switchPref ->
+                if (switchPref.isChecked) {
+                    "Status: ON"
+                } else {
+                    "Status: OFF"
+                }
+            }
+
+        notificationPref?.preferenceDataStore = dataStore
+
+        // Get the value as follows
+        val isNotifEnabled = dataStore.getBoolean(getString(R.string.key_new_msg_notif), false)
+    }
+
+    // Note this class disables shared prefs for the preferences whch are using it
+    inner class DataStore : PreferenceDataStore() {
+
+
+        override fun getBoolean(key: String?, defValue: Boolean): Boolean {
+            if (key == "key_new_msg_notif") {
+                // Save wherever you want to
+                Log.i(TAG, "getBoolean in data store for key $key has been executed")
+            }
+
+            return defValue
+        }
+
+        override fun putBoolean(key: String?, value: Boolean) {
+            if (key == "key_new_msg_notif") {
+                // Save wherever you want to
+                Log.i(TAG, "putBoolean in data store for key $key: with new value $value ")
             }
         }
     }

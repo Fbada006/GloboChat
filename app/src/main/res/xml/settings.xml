@@ -80,7 +80,12 @@
         <Preference
             android:key="@string/key_privacy_policy"
             android:title="@string/title_privacy_policy"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://www.google.com" />
+        </Preference>
 
     </PreferenceCategory>
 
