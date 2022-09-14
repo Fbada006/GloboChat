@@ -17,14 +17,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        // Get NavHost and NavController
+        // Get NavHost and NavController
         val navHostFrag = supportFragmentManager.findFragmentById(R.id.nav_host_frag) as NavHostFragment
         navController = navHostFrag.navController
 
-//        // Get AppBarConfiguration
+       // Get AppBarConfiguration
        appBarConfiguration = AppBarConfiguration(navController.graph)
-//
-//        // Link ActionBar with NavController
+
+        // Link ActionBar with NavController
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
