@@ -3,6 +3,7 @@ package com.example.globochat
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -13,6 +14,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
+
+    companion object {
+        const val TAG = "MainActivity"
+    }
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -31,6 +36,11 @@ class MainActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         // Link ActionBar with NavController
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val publicInfo = sharedPreferences.getStringSet(getString(R.string.key_public_info), null)
+
+        Log.i(TAG, "Public info: $publicInfo")
     }
 
     override fun onSupportNavigateUp(): Boolean {
